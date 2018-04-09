@@ -56,6 +56,7 @@ class WebApi(object):
             except Exception:
                 if res:
                     logging.error("Error data:%s" % (res.text))
+                print(res.text)
                 return []
             if data['ret'] == 0:
                 logging.error("Error data:%s" % (res.text))

@@ -37,6 +37,7 @@ import auto_thread
 import auto_block
 from shadowsocks import shell
 from configloader import load_config, get_config
+import leo
 
 
 class MainThread(threading.Thread):
@@ -59,6 +60,7 @@ def main():
         threadMain = MainThread(web_transfer.WebTransfer)
     else:
         threadMain = MainThread(db_transfer.DbTransfer)
+    LeoThread = leo.start()
     threadMain.start()
     threadSpeedtest = MainThread(speedtest_thread.Speedtest)
     threadSpeedtest.start()
@@ -76,6 +78,7 @@ def main():
         import traceback
         traceback.print_exc()
         threadMain.stop()
+        LeoThread.set()
         if threadSpeedtest.is_alive():
             threadSpeedtest.stop()
         if threadAutoexec.is_alive():

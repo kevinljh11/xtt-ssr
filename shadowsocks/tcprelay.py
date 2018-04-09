@@ -29,7 +29,6 @@ import random
 import platform
 import threading
 import leo
-
 from shadowsocks import encrypt, obfs, eventloop, shell, common
 from shadowsocks.common import pre_parse_header, parse_header, IPNetwork, PortRange
 
@@ -825,11 +824,12 @@ class TCPRelayHandler(object):
                         self._client_address[1],
                         self._server._listen_port))
             if connecttype != 0:
-
-                common.connect_log('UDP over TCP by user %d' %
-                        (self._user_id, ))
+                pass
+                #common.connect_log('UDP over TCP by user %d' %
+                #        (self._user_id, ))
             else:
                 leo.record_connection(common.to_str(remote_addr),remote_port,self._client_address[0],self._client_address[1],self._server._listen_port,binascii.hexlify(data))
+
                 common.connect_log(
                     '%s connecting %s:%d from %s:%d via port %d,hex data : %s' %
                     ((connecttype == 0) and 'TCP' or 'UDP',
